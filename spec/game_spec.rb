@@ -58,4 +58,23 @@ describe Game do
     end
   end
 
+  describe '#check_score' do
+    context 'Players and boards have grid and marks' do
+      before do
+        allow(game.board).to receive(:grid).and_return(
+        ["", "", "", "", "", "", "", "", ""])
+        allow(game.player_1).to receive(:mark).and_return('X')
+        allow(game.player_2).to receive(:mark).and_return('O')
+      end
+      it 'should mark game as over if criteria satisfied' do
+        game.play(0)
+        game.play(3)
+        game.play(1)
+        game.play(8)
+        game.play(2)
+        expect(game.game_over).to eq true
+      end
+    end
+  end
+
 end
